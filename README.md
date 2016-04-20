@@ -1,7 +1,7 @@
 # Network-Scanner
 Tiny and overhead free network scanner to find used IP's.
 
-I got several Routers at home. Most i don't forget, the IP's where anywhere at 
+I got several Routers at home. Mostly i forget the IP's. They usual configured anywhere at 
 192.168.3.150 and 192.168.3.200. But often i have no glue where exactly.
 
 So i coded this little scanner.
