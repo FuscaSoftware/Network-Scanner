@@ -6,18 +6,12 @@ I got several Routers at home. Mostly i forget the IP's. They usual configured a
 
 So i coded this little scanner.
 
+Actually it scans also Ports (80, 8080, SMB and 3306(sql default port))
+
+![Scanner Screenshot](scanner.png)
+
 It has no foreign dependencies and run with JDK > 7.
 
-I will add a portscan soon.
-The Method is allready located at
 
-```
-public class IPAddress extends Observable {
-  ...
 
-  public String portAvailable(int port){
-    ...
-  }
-}
-```
 

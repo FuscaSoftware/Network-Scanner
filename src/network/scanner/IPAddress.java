@@ -1,8 +1,12 @@
 package network.scanner;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A class for managing IP-Objects
@@ -56,16 +60,27 @@ public class IPAddress extends Observable {
     }
 
     public String toString() {
-        return this.getHost() + " is reachable: " + this.getStatus();
+        InetAddress currentIP = null;
+        try {
+            currentIP = InetAddress.getByName(this.getHost());
+        } catch (UnknownHostException ex) {
+            Logger.getLogger(IPAddress.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return  this.getHost() + " is reachable: " + this.getStatus() 
+                + " 80 (" + this.available(80 , currentIP) + ")"
+                + " 8080 (" + this.available(8080 , currentIP) + ")"
+                + " 445 (" + this.available(445 , currentIP) + ")"
+                + " 3306 (" + this.available(3306 , currentIP) + ")";
     }
 
-    public String available(int port) {
+    public String available(int port, InetAddress IPAddress) {
         Socket s = null;
         try {
-            s = new Socket("localhost", port);
-            return null;
+            s = new Socket(IPAddress, port);
+            return "-";
         } catch (IOException e) {
-            return this.getHost() + " +-------------Port " + port + " is available";
+            return "+";
         } finally {
             if (s != null) {
                 try {
